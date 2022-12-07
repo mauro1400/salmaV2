@@ -1,17 +1,16 @@
 <?php
 
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubarticulosTable extends Migration
+class CreateArticuloTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'subarticulos';
+    public $tableName = 'articulo';
 
     /**
      * Run the migrations.
@@ -25,23 +24,18 @@ class CreateSubarticulosTable extends Migration
             $table->bigIncrements('id');
             $table->integer('codigo')->nullable()->default(null);
             $table->string('descripcion')->nullable()->default(null);
+            $table->integer('cantidad')->nullable()->default(null);
             $table->string('unidad')->nullable()->default(null);
-            $table->string('estado')->nullable()->default(null);
-            $table->unsignedBigInteger('id_articulo')->nullable()->default(null);
-            $table->integer('monto')->nullable()->default(null);
             $table->integer('minimo')->nullable()->default(null);
-            $table->string('codigo_barras')->nullable()->default(null);
-            $table->string('codigo_anterior')->nullable()->default(null);
-            $table->unsignedBigInteger('material_id')->nullable()->default(null);
+            $table->string('estado')->nullable()->default(null);
+            $table->decimal('precio_unitario', 10, 2)->nullable()->default(null);
+            $table->decimal('costo_total', 10, 2)->nullable()->default(null);
+            $table->unsignedBigInteger('id_categoria')->nullable()->default(null);
 
-            $table->index(["id_articulo"], 'index_subarticles_on_article_id');
-
-            $table->index(["material_id"], 'index_subarticles_on_material_id');
             $table->timestamps();
 
-
-            $table->foreign('material_id', 'index_subarticles_on_material_id')
-                ->references('id')->on('materiales')
+            $table->foreign('id_categoria', 'fk_articulo_cargotiaArticulo')
+                ->references('id')->on('categoria_articulo')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });

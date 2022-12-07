@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuministrosTable extends Migration
+class CreateCategoriaArticuloTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'suministros';
+    public $tableName = 'categoria_articulo';
 
     /**
      * Run the migrations.
-     * @table suministros
+     * @table materiales
      *
      * @return void
      */
@@ -22,10 +22,10 @@ class CreateSuministrosTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre')->nullable()->default(null);
-            $table->string('nit')->nullable()->default(null);
-            $table->string('telefono')->nullable()->default(null);
-            $table->string('contacto')->nullable()->default(null);
+            $table->string('codigo', 50)->nullable()->default(null);
+            $table->string('descripcion')->nullable()->default(null);
+            $table->string('estado', 2)->nullable()->default(null);
+            
             $table->timestamps();
         });
     }

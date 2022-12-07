@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequerimientosTable extends Migration
+class CreateRequerimientoTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'requerimientos';
+    public $tableName = 'requerimiento';
 
     /**
      * Run the migrations.
@@ -22,21 +22,20 @@ class CreateRequerimientosTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('nro_solicitud')->nullable()->default('0');
+            $table->dateTime('fecha_solicitud')->nullable()->default(null);
+            $table->dateTime('fecha_entregra')->nullable()->default(null);
+            $table->string('estado')->nullable()->default('0');
             $table->unsignedBigInteger('admin_id')->nullable()->default(null);
             $table->unsignedBigInteger('user_id')->nullable()->default(null);
-            $table->string('estado')->nullable()->default('0');
-            $table->dateTime('decha de entrega')->nullable()->default(null);
             $table->string('observacion')->nullable()->default(null);
-            $table->integer('nro_solicitud')->nullable()->default('0');
-            $table->unsignedBigInteger('unidades_id');
-
-            $table->index(["unidades_id"], 'fk_requerimientos_unidades1_idx');
+            $table->unsignedBigInteger('unidad_id');
             
             $table->timestamps();
 
 
-            $table->foreign('unidades_id', 'fk_requerimientos_unidades1_idx')
-                ->references('id')->on('unidades')
+            $table->foreign('unidad_id', 'fk_requerimiento_unidad')
+                ->references('id')->on('unidad')
                 ->onDelete('cascade');
         });
     }

@@ -1,21 +1,20 @@
 <?php
 
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialesTable extends Migration
+class CreateUnidadTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'materiales';
+    public $tableName = 'unidad';
 
     /**
      * Run the migrations.
-     * @table materiales
+     * @table unidades
      *
      * @return void
      */
@@ -23,11 +22,10 @@ class CreateMaterialesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('codigo', 50)->nullable()->default(null);
-            $table->string('descripcion')->nullable()->default(null);
+            $table->integer('codigo')->nullable()->default(null);
+            $table->string('nombre', 230)->nullable()->default(null);
             $table->string('estado', 2)->nullable()->default(null);
-            
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 
